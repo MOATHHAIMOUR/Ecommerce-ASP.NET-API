@@ -1,4 +1,4 @@
-## E-Commerce Platform with User Authentication and Product Management 🔥🔥
+## E-Commerce Platform 🔥🔥
 
 This project is an e-commerce platform that allows users to register, log in, browse products, place orders, and provide reviews. Administrators can manage products, categories, and user roles. The system also includes payment processing and shipping functionality.
 
