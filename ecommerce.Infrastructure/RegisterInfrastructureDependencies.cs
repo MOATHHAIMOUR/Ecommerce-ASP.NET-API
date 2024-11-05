@@ -20,11 +20,10 @@ namespace Ecommerce.Infrastructure
              options.UseSqlServer(configuration.GetConnectionString("SQLServer")));
     
 
-
-
             // Add All Repositories In DI Container
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 

@@ -17,11 +17,11 @@ namespace Ecommerce.Application.Features.Product.Queries.GetAllProductsQuery
         public async Task<ApiResponse<List<ProductDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
 
-            var result = await _productServices.GetAllProduts();
+            var result = await _productServices.GetAllProduts(request.Filters,request.Orders,request.PageNumber,request.PageSize);
 
             return ApiResponseHandler.Success(
-                data: result.Value ?? [],
-                meta: new { count = result.Value?.Count ?? 0 }
+                data: result.Value,
+                meta: new { count = result.Value.Count }
             );
         }
     }

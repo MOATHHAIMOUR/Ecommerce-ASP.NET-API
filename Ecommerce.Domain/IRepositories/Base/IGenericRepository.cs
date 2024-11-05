@@ -2,13 +2,17 @@
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
+
+        public Task<List<DTO>> GetAll<DTO>() where DTO : class;
+
+
         /// <summary>
         /// Returns all elements of the specified type <typeparamref name="TEntity"/> from the database entity.
         /// The user must specify the type <typeparamref name="TEntity"/> when calling this method.
         /// </summary>
         /// <typeparam name="TEntity">The type of the elements to be retrieved.</typeparam>
         /// <returns>A <see cref="Task"/> that represents the asynchronous operation, containing a list of elements of type <typeparamref name="TEntity"/>.</returns>
-        public Task<List<TEntity>> GetAllPaginatedAsync(int pageNumber, int pageSize);
+        public Task<List<TEntity>> GetAllPaginatedAsync(int pageNumber, int pageSize, Dictionary<string, string> filters, Dictionary<string, string> orders);
 
 
         /// <summary>
@@ -17,7 +21,7 @@
         /// </summary>
         /// <typeparam name="DTO">The type of the elements to be retrieved.</typeparam>
         /// <returns>A <see cref="Task"/> that represents the asynchronous operation, containing a list of elements of type <typeparamref name="DTO"/>.</returns>
-        public Task<List<DTO>> GetAllPaginatedAsync<DTO>(int pageNumber, int pageSize);
+        public Task<List<DTO>> GetAllPaginatedAsync<DTO>(int pageNumber, int pageSize, Dictionary<string, string> filters, Dictionary<string, string> orders) where DTO : class;
 
 
         /// <summary>

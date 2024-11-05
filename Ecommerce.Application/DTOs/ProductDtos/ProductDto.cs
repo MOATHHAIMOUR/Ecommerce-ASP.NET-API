@@ -14,6 +14,5 @@
 
         public required bool IsAvailable { get; set; }
 
-        
     }
 }

@@ -15,9 +15,9 @@ namespace Ecommerce.Application.Services
             _productRepository = productRepository;
         }
 
-        public async Task<Result<List<ProductDto>>> GetAllProduts(int pageNumber, int pageSize)
+        public async Task<Result<List<ProductDto>>> GetAllProduts(Dictionary<string, string> filters, Dictionary<string, string> orders, int pageNumber, int PageSize)
         {
-            return Result<List<ProductDto>>.Success(await _productRepository.GetAllPaginatedAsync<ProductDto>(pageNumber, pageSize));
+            return Result<List<ProductDto>>.Success(await _productRepository.GetAllPaginatedAsync<ProductDto>(pageNumber, PageSize,filters,orders));    
         }
 
         public async Task<Result<ProductDto?>> GetProductById(int ProductId)

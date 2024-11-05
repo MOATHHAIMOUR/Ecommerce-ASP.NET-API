@@ -24,6 +24,7 @@ namespace Ecommerce.Application
 
             // Add Services to DI Contianer
             services.AddScoped<IProductServices, ProductServices>();
+            services.AddScoped<ICategoryServices, CategoryServices>();
 
 
             return services;

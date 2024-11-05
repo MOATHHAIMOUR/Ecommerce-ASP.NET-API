@@ -21,8 +21,16 @@ namespace Ecommerce.Api.AppMetaData
         {
             public const string prefix = Rule + "Product/";
 
-            public const string GetProductPaginatedList = prefix + "/" + "GetAllProducts";
+            public const string GetProductPaginatedList = prefix + "GetAllProducts";
 
+
+        }
+
+        public static class CategoreyRouting
+        {
+            public const string prefix = Rule + "Category/";
+
+            public const string GetAllCategories = prefix + "GetAllCategories";
 
         }
 

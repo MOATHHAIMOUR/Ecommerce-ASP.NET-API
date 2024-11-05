@@ -4,7 +4,7 @@ using Ecommerce.Domain.Entites;
 
 namespace Ecommerce.Application.DTOs.ProductDtos.Profiler
 {
-    internal class ProductProfiler : Profile
+    public class ProductProfiler : Profile
     {
         public ProductProfiler()
         {

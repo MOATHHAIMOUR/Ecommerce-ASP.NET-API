@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Ecommerce.Infrastructure.Data;
 using Ecommerce.Domain.IRepositories.Base;
 using Microsoft.EntityFrameworkCore;
+using Ecommerce.Infrastructure.Extentions;
 
 namespace Ecommerce.Infrastructure.Repositories.Base
 {
@@ -19,22 +20,34 @@ namespace Ecommerce.Infrastructure.Repositories.Base
             Mapper = mapper; 
         }
 
-        public Task<List<TEntity>> GetAllPaginatedAsync(int pageNumber,int pageSize)
+
+        public async Task<List<TEntity>> GetAllPaginatedAsync(int pageNumber, int pageSize, Dictionary<string, string> filters, Dictionary<string, string> orders)
         {
-            return Entity
-                    .AsNoTracking()
-                    .Skip((pageNumber-1) * pageSize)
-                    .Take(pageSize)
-                    .ToListAsync();
+            return await Entity.AsNoTracking()
+                     .CustomFiltring(filters)
+                     .CustomOrdring(orders)
+                     .CustomPagination(pageNumber, pageSize)
+                     .ToListAsync();
         }
 
-        public Task<List<DTO>> GetAllPaginatedAsync<DTO>(int pageNumber, int pageSize)
+        public async Task<List<DTO>> GetAllPaginatedAsync<DTO>(int pageNumber,int pageSize,Dictionary<string,string> filters, Dictionary<string, string> orders ) where DTO : class
         {
-           return  Entity.AsNoTracking()
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
-                    .ProjectTo<DTO>(Mapper.ConfigurationProvider)
-                    .ToListAsync(); 
+            var query = Entity.AsNoTracking()
+            .CustomFiltring(filters)
+            .ProjectTo<DTO>(Mapper.ConfigurationProvider)
+            .CustomOrdring(orders)
+            .CustomPagination(pageNumber, pageSize);
+                    
+
+            return await query.ToListAsync(); 
+        }
+
+        public async Task<List<DTO>> GetAll<DTO>() where DTO : class
+        {
+            var query = Entity.AsNoTracking()
+            .ProjectTo<DTO>(Mapper.ConfigurationProvider); 
+
+            return await query.ToListAsync();
         }
 
         public async Task<TEntity?> GetById(int Id)

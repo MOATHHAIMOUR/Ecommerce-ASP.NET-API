@@ -5,7 +5,7 @@ namespace Ecommerce.Application.Common.ResultPattern
     public class Result<T>
     {
         public bool IsSuccess { get; }
-        public T? Value { get; }
+        public T Value { get; }
         public Error Error { get; }
 
         private Result(Error error)
@@ -15,7 +15,7 @@ namespace Ecommerce.Application.Common.ResultPattern
             IsSuccess = false;
         }
 
-        private Result(T? value)
+        private Result(T value)
         {
             Value = value;
             Error = Error.None;
